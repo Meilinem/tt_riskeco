@@ -15,15 +15,14 @@ def     end_game(hive):
 def     bee_state(hive, bee, idx):
     if bee.hp <= 0:
         hive.n_bees -= 1
-        if hive.n_bees <= 0:
-            if bee.b_type == "queen":
-                print("------> QUEEN DIES <------")
-            else:
-                print("------> NO MORE BEE LEFT <------")
+        print(f"------>  NUMBER OF BEES LEFT {hive.n_bees}<------")
+        if bee.b_type == "queen":
+            print("------> QUEEN DIES <------")
             end_game(hive)
-        del bee
+        if hive.n_bees <= 0:
+            print("------> NO MORE BEE LEFT <------")
+            end_game(hive)
         del hive.hive_state[idx]
-        print("------>  NUMBER OF BEES LEFT <------", hive.n_bees)
 
 def     hit(hive):
     idx = randrange(hive.n_bees)
@@ -44,22 +43,13 @@ def     init(hive):
             hive.add_bee(b_type)
 
 def     start():
-    auto = 1
     hive = Hive()
     init(hive)
 
     print("Let's start this little non ecologic game")
-    mode = input("Choose your mode : manual [0] or auto [1]")
-    if mode == 0:
-        auto = 0
-
     while hive.n_bees > 0:
-        if auto == 0:
-            c = input("Hit a random bee ? [y/n]")
-            if (c == 'y'):
-                print()
-                hit(hive)
-        else:
+        c = input("Hit a random bee ? [y/n]")
+        if (c == 'y'):
             print()
             hit(hive)
 
