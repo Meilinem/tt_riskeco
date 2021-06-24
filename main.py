@@ -2,6 +2,14 @@ from hive import Hive
 from random import randrange
 from print_functions import print_bee_infos
 
+def     print_hive(hive):
+    print(f"BEES LEFT {hive.n_bees} -------------")
+    for n, bee in enumerate(hive.hive_state):
+        print(f"BEE {n} -- \
+        TYPE : {bee.b_type} \
+        HP : {bee.hp}")
+        print()
+
 def     end_game(hive):
     del hive
     print("GAME OVER")
@@ -31,27 +39,22 @@ def     hit(hive):
             bee = n
             break
     bee.hit()
-    bee_state(hive, bee, idx)
     print_bee_infos(bee, idx)
-
-def     init(hive):
-    lst = hive.hive_info.keys()
-
-    for b_type in lst:
-        n = hive.get_n_bee(b_type)
-        for i in range(n):
-            hive.add_bee(b_type)
+    bee_state(hive, bee, idx)
 
 def     start():
     hive = Hive()
-    init(hive)
+    i = 0
 
+    print_hive(hive)
     print("Let's start this little non ecologic game")
     while hive.n_bees > 0:
-        c = input("Hit a random bee ? [y/n]")
-        if (c == 'y'):
-            print()
-            hit(hive)
+        print(i)
+        i += 1
+        #c = input("Hit a random bee ? [y/n]")
+        #if (c == 'y'):
+        #    print()
+        hit(hive)
 
 def     main():
     start()

@@ -10,20 +10,28 @@ class   Hive:
          "worker": {
             "hp": 70,
             "damage": 10,
-            "n": 5,
+            "n": 2,
         },
         "drone": {
             "hp": 50,
             "damage": 12,
-            "n": 8,
+            "n": 3,
         }
     }
     hive_state = []
-    init_bees = 14
-    n_bees = 14
+    init_bees = 0
+    n_bees = 0
 
-    def     __intit__(self):
-        pass
+    def     __init__(self):
+        self.init_bees = 14
+        self.n_bees = 5
+        self.hive_state = []
+        lst = self.hive_info.keys()
+
+        for b_type in lst:
+            n = self.get_n_bee(b_type)
+            for i in range(n):
+                self.add_bee(b_type)
 
     def    add_bee(self, b_type):
         if b_type not in self.hive_info.keys():
